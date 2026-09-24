@@ -16,34 +16,34 @@ table{border-collapse:collapse;width:100%;font-size:13px} td,th{border-bottom:1p
 .totals{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0 16px} .totals div b{font-size:20px;display:block}
 </style></head><body><main>
 <h1>Retune: MuonW 256K (LLM) and CIFAR-5M 512–4096</h1>
-<p class="muted">Updated 2026-09-24 02:44 EDT · page refreshes every 5 min · both pool slots (64 H100)</p>
+<p class="muted">Updated 2026-09-24 02:49 EDT · page refreshes every 5 min · both pool slots (64 H100)</p>
 <div class="card"><b>Plan.</b> Coordinate descent with the paper's rule: sweep one coordinate at a time over ×{½, 1/√2, √2, 2}
 (momenta on the refresh rate 1−q; LLM weight decay and cooldown on their grids, two points each side). A candidate that beats the centre
 median by more than Δ is repeated (2 seeds for a large gain, 3 for a small one) and becomes the new centre only if its median still wins.
 Stop after all seven coordinates pass with no move. LLM: Δ = 0.002, 8×H100 per run (~11 min), slot A; plus the tuned 128K and 512K optima
 re-run on H100 for a same-hardware reference. CIFAR: Δ = 0.001, one GPU per run (3–5 min), slot B.</div>
-<div class="totals"><div><b>0</b><span class="muted">runs done</span></div><div><b>0</b><span class="muted">running</span></div>
-<div><b>54</b><span class="muted">queued</span></div><div><b>0</b><span class="muted">failed</span></div></div>
+<div class="totals"><div><b>14</b><span class="muted">runs done</span></div><div><b>30</b><span class="muted">running</span></div>
+<div><b>13</b><span class="muted">queued</span></div><div><b>0</b><span class="muted">failed</span></div></div>
 <div class="grid">
 <section class="card">
  <div class="head"><h2>cifar-1024</h2><span class="badge live">running</span></div>
  <p class="muted">start: best grid rule <code>b1024-mlrq-alrq-mmf-b1f-b2f-mwdf-awdf</code> (0.2278)</p>
- <div class="kpis"><div><span>centre loss (median of 0 seeds)</span><b>–</b></div>
-  <div><span>best single run</span><b>–</b></div>
+ <div class="kpis"><div><span>centre loss (median of 2 seeds)</span><b>0.2347</b></div>
+  <div><span>best single run</span><b>0.2305</b></div>
   <div><span>moves accepted</span><b>0</b></div>
-  <div><span>runs finished</span><b>0 / 10</b></div></div>
- <p>sweeping <b>Muon LR</b>; 0 of 7 coordinates checked since the last move.</p>
+  <div><span>runs finished</span><b>6 / 11</b></div></div>
+ <p>sweeping <b>Muon LR</b> (confirming a move); 0 of 7 coordinates checked since the last move.</p>
  <div class="chips"><span class="chip cur">Muon LR</span><span class="chip ">Adam LR</span><span class="chip ">Muon momentum</span><span class="chip ">Adam beta1</span><span class="chip ">Adam beta2</span><span class="chip ">Muon WD</span><span class="chip ">Adam WD</span></div>
  <details><summary>current centre</summary><table class="kv"><tr><td>adam_beta1</td><td>0.6561</td></tr><tr><td>adam_beta2</td><td>0.999912</td></tr><tr><td>adam_lr</td><td>0.00196078</td></tr><tr><td>adam_weight_decay</td><td>0.00125</td></tr><tr><td>muon_lr</td><td>0.0136313</td></tr><tr><td>muon_momentum</td><td>0.930029</td></tr><tr><td>muon_weight_decay</td><td>0.00125</td></tr></table></details>
- <details open><summary>recent decisions</summary><ul class="ev"><li class="muted">none yet</li></ul></details>
+ <details open><summary>recent decisions</summary><ul class="ev"><li><b>Muon LR</b>: confirm (gain +4.2×10⁻³)</li></ul></details>
 </section>
 <section class="card">
  <div class="head"><h2>cifar-2048</h2><span class="badge live">running</span></div>
  <p class="muted">start: best grid rule <code>b2048-mlrl-alrl-mmf-b1f-b2f-mwdf-awdq</code> (0.2295)</p>
- <div class="kpis"><div><span>centre loss (median of 0 seeds)</span><b>–</b></div>
-  <div><span>best single run</span><b>–</b></div>
+ <div class="kpis"><div><span>centre loss (median of 2 seeds)</span><b>0.2343</b></div>
+  <div><span>best single run</span><b>0.2327</b></div>
   <div><span>moves accepted</span><b>0</b></div>
-  <div><span>runs finished</span><b>0 / 10</b></div></div>
+  <div><span>runs finished</span><b>2 / 10</b></div></div>
  <p>sweeping <b>Muon LR</b>; 0 of 7 coordinates checked since the last move.</p>
  <div class="chips"><span class="chip cur">Muon LR</span><span class="chip ">Adam LR</span><span class="chip ">Muon momentum</span><span class="chip ">Adam beta1</span><span class="chip ">Adam beta2</span><span class="chip ">Muon WD</span><span class="chip ">Adam WD</span></div>
  <details><summary>current centre</summary><table class="kv"><tr><td>adam_beta1</td><td>0.6561</td></tr><tr><td>adam_beta2</td><td>0.999912</td></tr><tr><td>adam_lr</td><td>0.00784314</td></tr><tr><td>adam_weight_decay</td><td>0.00353553</td></tr><tr><td>muon_lr</td><td>0.0545254</td></tr><tr><td>muon_momentum</td><td>0.930029</td></tr><tr><td>muon_weight_decay</td><td>0.00125</td></tr></table></details>
@@ -52,14 +52,14 @@ re-run on H100 for a same-hardware reference. CIFAR: Δ = 0.001, one GPU per run
 <section class="card">
  <div class="head"><h2>cifar-4096</h2><span class="badge live">running</span></div>
  <p class="muted">start: best grid rule <code>b4096-mlrq-alrf-mmf-b1f-b2s-mwdf-awdq</code> (0.2335)</p>
- <div class="kpis"><div><span>centre loss (median of 0 seeds)</span><b>–</b></div>
-  <div><span>best single run</span><b>–</b></div>
+ <div class="kpis"><div><span>centre loss (median of 2 seeds)</span><b>0.2372</b></div>
+  <div><span>best single run</span><b>0.2346</b></div>
   <div><span>moves accepted</span><b>0</b></div>
-  <div><span>runs finished</span><b>0 / 10</b></div></div>
- <p>sweeping <b>Muon LR</b>; 0 of 7 coordinates checked since the last move.</p>
+  <div><span>runs finished</span><b>6 / 12</b></div></div>
+ <p>sweeping <b>Muon LR</b> (confirming a move); 0 of 7 coordinates checked since the last move.</p>
  <div class="chips"><span class="chip cur">Muon LR</span><span class="chip ">Adam LR</span><span class="chip ">Muon momentum</span><span class="chip ">Adam beta1</span><span class="chip ">Adam beta2</span><span class="chip ">Muon WD</span><span class="chip ">Adam WD</span></div>
  <details><summary>current centre</summary><table class="kv"><tr><td>adam_beta1</td><td>0.6561</td></tr><tr><td>adam_beta2</td><td>0.998586</td></tr><tr><td>adam_lr</td><td>0.000980392</td></tr><tr><td>adam_weight_decay</td><td>0.005</td></tr><tr><td>muon_lr</td><td>0.0272627</td></tr><tr><td>muon_momentum</td><td>0.930029</td></tr><tr><td>muon_weight_decay</td><td>0.00125</td></tr></table></details>
- <details open><summary>recent decisions</summary><ul class="ev"><li class="muted">none yet</li></ul></details>
+ <details open><summary>recent decisions</summary><ul class="ev"><li><b>Muon LR</b>: confirm (gain +2.7×10⁻³)</li></ul></details>
 </section>
 <section class="card">
  <div class="head"><h2>cifar-512</h2><span class="badge live">running</span></div>
@@ -87,6 +87,6 @@ re-run on H100 for a same-hardware reference. CIFAR: Δ = 0.001, one GPU per run
 </section></div>
 <h2 style="margin-top:18px">H100 reference re-runs (tuned 128K / 512K optima)</h2>
 <div class="wrap"><table><tr><th>batch</th><th>seed</th><th>status</th><th>loss</th></tr><tr><td>128K</td><td>1</td><td>pending</td><td>–</td></tr><tr><td>128K</td><td>2</td><td>pending</td><td>–</td></tr><tr><td>512K</td><td>1</td><td>pending</td><td>–</td></tr><tr><td>512K</td><td>2</td><td>pending</td><td>–</td></tr></table></div>
-<h2 style="margin-top:18px">Running now</h2><div class="wrap"><table><tr><th>search</th><th>run</th><th>seed</th><th>node</th><th>started</th></tr><tr><td colspan=5 class=muted>none</td></tr></table></div>
-<h2 style="margin-top:18px">Recently finished</h2><div class="wrap"><table><tr><th>search</th><th>seed</th><th>loss</th><th>min</th><th>finished</th></tr><tr><td colspan=5 class=muted>none</td></tr></table></div>
+<h2 style="margin-top:18px">Running now</h2><div class="wrap"><table><tr><th>search</th><th>run</th><th>seed</th><th>node</th><th>started</th></tr><tr><td>cifar-512</td><td>512-s42-821789f6f6c6</td><td>42</td><td>della-k18g2</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s43-6b5c01a069e5</td><td>43</td><td>della-k18g2</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s42-9f91ed3c7601</td><td>42</td><td>della-k12g1</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s42-b0b7e372c3a5</td><td>42</td><td>della-k12g1</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s42-8582efefb678</td><td>42</td><td>della-k12g1</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s42-b8a2dd925cb0</td><td>42</td><td>della-k12g1</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s42-f9d56da32fe8</td><td>42</td><td>della-k12g2</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s42-69532fafb9f7</td><td>42</td><td>della-k12g2</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s42-4ecd38bc10b5</td><td>42</td><td>della-k12g2</td><td>5 min ago</td></tr><tr><td>cifar-2048</td><td>048-s42-f0e35f2e830f</td><td>42</td><td>della-k14g1</td><td>5 min ago</td></tr><tr><td>cifar-512</td><td>512-s42-383b2ab49674</td><td>42</td><td>della-k12g2</td><td>5 min ago</td></tr><tr><td>cifar-1024</td><td>024-s42-e640ef6bcc94</td><td>42</td><td>della-k12g2</td><td>5 min ago</td></tr><tr><td>cifar-1024</td><td>024-s42-1650776263b0</td><td>42</td><td>della-k12g2</td><td>5 min ago</td></tr><tr><td>cifar-1024</td><td>024-s42-0bc3b398b56f</td><td>42</td><td>della-k12g2</td><td>5 min ago</td></tr><tr><td>cifar-1024</td><td>024-s42-988c966ba83f</td><td>42</td><td>della-k12g2</td><td>5 min ago</td></tr><tr><td>cifar-2048</td><td>048-s42-5d8c923eb158</td><td>42</td><td>della-k14g1</td><td>5 min ago</td></tr><tr><td>cifar-2048</td><td>048-s42-3bad80821d75</td><td>42</td><td>della-k14g1</td><td>5 min ago</td></tr><tr><td>cifar-2048</td><td>048-s42-4310c26dc575</td><td>42</td><td>della-k14g1</td><td>5 min ago</td></tr><tr><td>llm-256k</td><td>256k-s1-c992108760a3</td><td>1</td><td>della-j14g2</td><td>4 min ago</td></tr><tr><td>llm-256k</td><td>256k-s2-fe79046d2108</td><td>2</td><td>della-j14g1</td><td>4 min ago</td></tr><tr><td>llm-256k</td><td>256k-s1-358285b6feee</td><td>1</td><td>della-j12g1</td><td>4 min ago</td></tr><tr><td>llm-256k</td><td>256k-s1-dc3a085d7068</td><td>1</td><td>della-j15g2</td><td>3 min ago</td></tr><tr><td>cifar-2048</td><td>048-s42-e9d94feb2de4</td><td>42</td><td>della-k18g2</td><td>1 min ago</td></tr><tr><td>cifar-2048</td><td>048-s42-4f3237ef4119</td><td>42</td><td>della-k18g2</td><td>1 min ago</td></tr><tr><td>cifar-2048</td><td>048-s42-c8160d9e18f0</td><td>42</td><td>della-k18g2</td><td>1 min ago</td></tr><tr><td>cifar-2048</td><td>048-s42-78a254353323</td><td>42</td><td>della-k18g2</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>096-s42-aff2e42a133b</td><td>42</td><td>della-k14g1</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>096-s42-01b132087180</td><td>42</td><td>della-k14g1</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>096-s42-8ace8fc38ff3</td><td>42</td><td>della-k14g1</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>096-s42-bd7fd733877e</td><td>42</td><td>della-k12g1</td><td>1 min ago</td></tr></table></div>
+<h2 style="margin-top:18px">Recently finished</h2><div class="wrap"><table><tr><th>search</th><th>seed</th><th>loss</th><th>min</th><th>finished</th></tr><tr><td>cifar-4096</td><td>43</td><td>0.2365</td><td>3.3</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>42</td><td>0.2381</td><td>3.4</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>42</td><td>0.2346</td><td>3.4</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>42</td><td>0.2380</td><td>3.3</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>42</td><td>0.2396</td><td>3.4</td><td>1 min ago</td></tr><tr><td>cifar-4096</td><td>42</td><td>0.2366</td><td>3.4</td><td>1 min ago</td></tr><tr><td>cifar-2048</td><td>43</td><td>0.2359</td><td>3.5</td><td>1 min ago</td></tr><tr><td>cifar-2048</td><td>42</td><td>0.2327</td><td>3.5</td><td>1 min ago</td></tr><tr><td>cifar-1024</td><td>43</td><td>0.2338</td><td>3.7</td><td>1 min ago</td></tr><tr><td>cifar-1024</td><td>42</td><td>0.2342</td><td>3.7</td><td>1 min ago</td></tr><tr><td>cifar-1024</td><td>42</td><td>0.2355</td><td>3.7</td><td>1 min ago</td></tr><tr><td>cifar-1024</td><td>42</td><td>0.2316</td><td>3.7</td><td>1 min ago</td></tr><tr><td>cifar-1024</td><td>42</td><td>0.2344</td><td>3.7</td><td>1 min ago</td></tr><tr><td>cifar-1024</td><td>42</td><td>0.2305</td><td>3.7</td><td>1 min ago</td></tr></table></div>
 </main></body></html>
