@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="300"><title>Retune Progress</title>
+<style>
+:root{--bg:#fafaf8;--fg:#1d1f22;--muted:#6b7076;--card:#fff;--line:#e4e5e7;--acc:#1f6fb4;--ok:#2f8f5b;--live:#e07b00}
+@media (prefers-color-scheme:dark){:root{--bg:#16181b;--fg:#e8e9eb;--muted:#9aa0a6;--card:#1f2226;--line:#33373c;--acc:#6aa7e0;--ok:#5cc08a;--live:#f0a040}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px} h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:0}
+.muted{color:var(--muted)} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.head{display:flex;justify-content:space-between;align-items:center} .badge{font-size:12px;padding:2px 8px;border-radius:99px;color:#fff}
+.badge.ok{background:var(--ok)} .badge.live{background:var(--live)}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:8px 0} .kpis span{display:block;font-size:12px;color:var(--muted)} .kpis b{font-size:17px}
+.chips{display:flex;flex-wrap:wrap;gap:4px} .chip{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:1px 6px} .chip.cur{border-color:var(--acc);color:var(--acc);font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:13px} td,th{border-bottom:1px solid var(--line);padding:3px 6px;text-align:left}
+.wrap{overflow-x:auto} ul.ev{margin:4px 0;padding-left:18px;font-size:13px} code{font-size:12px} details{margin-top:6px}
+.totals{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0 16px} .totals div b{font-size:20px;display:block}
+</style></head><body><main>
+<h1>Retune: MuonW 256K (LLM) and CIFAR-5M 512–4096</h1>
+<p class="muted">Updated 2026-09-24 02:43 EDT · page refreshes every 5 min · both pool slots (64 H100)</p>
+<div class="card"><b>Plan.</b> Coordinate descent with the paper's rule: sweep one coordinate at a time over ×{½, 1/√2, √2, 2}
+(momenta on the refresh rate 1−q; LLM weight decay and cooldown on their grids, two points each side). A candidate that beats the centre
+median by more than Δ is repeated (2 seeds for a large gain, 3 for a small one) and becomes the new centre only if its median still wins.
+Stop after all seven coordinates pass with no move. LLM: Δ = 0.002, 8×H100 per run (~11 min), slot A; plus the tuned 128K and 512K optima
+re-run on H100 for a same-hardware reference. CIFAR: Δ = 0.001, one GPU per run (3–5 min), slot B.</div>
+<div class="totals"><div><b>0</b><span class="muted">runs done</span></div><div><b>0</b><span class="muted">running</span></div>
+<div><b>54</b><span class="muted">queued</span></div><div><b>0</b><span class="muted">failed</span></div></div>
+<div class="grid">
+<section class="card">
+ <div class="head"><h2>cifar-1024</h2><span class="badge live">running</span></div>
+ <p class="muted">start: best grid rule <code>b1024-mlrq-alrq-mmf-b1f-b2f-mwdf-awdf</code> (0.2278)</p>
+ <div class="kpis"><div><span>centre loss (median of 0 seeds)</span><b>–</b></div>
+  <div><span>best single run</span><b>–</b></div>
+  <div><span>moves accepted</span><b>0</b></div>
+  <div><span>runs finished</span><b>0 / 10</b></div></div>
+ <p>sweeping <b>Muon LR</b>; 0 of 7 coordinates checked since the last move.</p>
+ <div class="chips"><span class="chip cur">Muon LR</span><span class="chip ">Adam LR</span><span class="chip ">Muon momentum</span><span class="chip ">Adam beta1</span><span class="chip ">Adam beta2</span><span class="chip ">Muon WD</span><span class="chip ">Adam WD</span></div>
+ <details><summary>current centre</summary><table class="kv"><tr><td>adam_beta1</td><td>0.6561</td></tr><tr><td>adam_beta2</td><td>0.999912</td></tr><tr><td>adam_lr</td><td>0.00196078</td></tr><tr><td>adam_weight_decay</td><td>0.00125</td></tr><tr><td>muon_lr</td><td>0.0136313</td></tr><tr><td>muon_momentum</td><td>0.930029</td></tr><tr><td>muon_weight_decay</td><td>0.00125</td></tr></table></details>
+ <details open><summary>recent decisions</summary><ul class="ev"><li class="muted">none yet</li></ul></details>
+</section>
+<section class="card">
+ <div class="head"><h2>cifar-2048</h2><span class="badge live">running</span></div>
+ <p class="muted">start: best grid rule <code>b2048-mlrl-alrl-mmf-b1f-b2f-mwdf-awdq</code> (0.2295)</p>
+ <div class="kpis"><div><span>centre loss (median of 0 seeds)</span><b>–</b></div>
+  <div><span>best single run</span><b>–</b></div>
+  <div><span>moves accepted</span><b>0</b></div>
+  <div><span>runs finished</span><b>0 / 10</b></div></div>
+ <p>sweeping <b>Muon LR</b>; 0 of 7 coordinates checked since the last move.</p>
+ <div class="chips"><span class="chip cur">Muon LR</span><span class="chip ">Adam LR</span><span class="chip ">Muon momentum</span><span class="chip ">Adam beta1</span><span class="chip ">Adam beta2</span><span class="chip ">Muon WD</span><span class="chip ">Adam WD</span></div>
+ <details><summary>current centre</summary><table class="kv"><tr><td>adam_beta1</td><td>0.6561</td></tr><tr><td>adam_beta2</td><td>0.999912</td></tr><tr><td>adam_lr</td><td>0.00784314</td></tr><tr><td>adam_weight_decay</td><td>0.00353553</td></tr><tr><td>muon_lr</td><td>0.0545254</td></tr><tr><td>muon_momentum</td><td>0.930029</td></tr><tr><td>muon_weight_decay</td><td>0.00125</td></tr></table></details>
+ <details open><summary>recent decisions</summary><ul class="ev"><li class="muted">none yet</li></ul></details>
+</section>
+<section class="card">
+ <div class="head"><h2>cifar-4096</h2><span class="badge live">running</span></div>
+ <p class="muted">start: best grid rule <code>b4096-mlrq-alrf-mmf-b1f-b2s-mwdf-awdq</code> (0.2335)</p>
+ <div class="kpis"><div><span>centre loss (median of 0 seeds)</span><b>–</b></div>
+  <div><span>best single run</span><b>–</b></div>
+  <div><span>moves accepted</span><b>0</b></div>
+  <div><span>runs finished</span><b>0 / 10</b></div></div>
+ <p>sweeping <b>Muon LR</b>; 0 of 7 coordinates checked since the last move.</p>
+ <div class="chips"><span class="chip cur">Muon LR</span><span class="chip ">Adam LR</span><span class="chip ">Muon momentum</span><span class="chip ">Adam beta1</span><span class="chip ">Adam beta2</span><span class="chip ">Muon WD</span><span class="chip ">Adam WD</span></div>
+ <details><summary>current centre</summary><table class="kv"><tr><td>adam_beta1</td><td>0.6561</td></tr><tr><td>adam_beta2</td><td>0.998586</td></tr><tr><td>adam_lr</td><td>0.000980392</td></tr><tr><td>adam_weight_decay</td><td>0.005</td></tr><tr><td>muon_lr</td><td>0.0272627</td></tr><tr><td>muon_momentum</td><td>0.930029</td></tr><tr><td>muon_weight_decay</td><td>0.00125</td></tr></table></details>
+ <details open><summary>recent decisions</summary><ul class="ev"><li class="muted">none yet</li></ul></details>
+</section>
+<section class="card">
+ <div class="head"><h2>cifar-512</h2><span class="badge live">running</span></div>
+ <p class="muted">start: best grid rule <code>b512-mlrl-alrq-mmf-b1s-b2s-mwdf-awdq</code> (0.2274)</p>
+ <div class="kpis"><div><span>centre loss (median of 0 seeds)</span><b>–</b></div>
+  <div><span>best single run</span><b>–</b></div>
+  <div><span>moves accepted</span><b>0</b></div>
+  <div><span>runs finished</span><b>0 / 10</b></div></div>
+ <p>sweeping <b>Muon LR</b>; 0 of 7 coordinates checked since the last move.</p>
+ <div class="chips"><span class="chip cur">Muon LR</span><span class="chip ">Adam LR</span><span class="chip ">Muon momentum</span><span class="chip ">Adam beta1</span><span class="chip ">Adam beta2</span><span class="chip ">Muon WD</span><span class="chip ">Adam WD</span></div>
+ <details><summary>current centre</summary><table class="kv"><tr><td>adam_beta1</td><td>0.430467</td></tr><tr><td>adam_beta2</td><td>0.999823</td></tr><tr><td>adam_lr</td><td>0.00138648</td></tr><tr><td>adam_weight_decay</td><td>0.00176777</td></tr><tr><td>muon_lr</td><td>0.0136313</td></tr><tr><td>muon_momentum</td><td>0.930029</td></tr><tr><td>muon_weight_decay</td><td>0.00125</td></tr></table></details>
+ <details open><summary>recent decisions</summary><ul class="ev"><li class="muted">none yet</li></ul></details>
+</section>
+<section class="card">
+ <div class="head"><h2>llm-256k</h2><span class="badge live">running</span></div>
+ <p class="muted">start: log-midpoint of the tuned 128K and 512K optima</p>
+ <div class="kpis"><div><span>centre loss (median of 0 seeds)</span><b>–</b></div>
+  <div><span>best single run</span><b>–</b></div>
+  <div><span>moves accepted</span><b>0</b></div>
+  <div><span>runs finished</span><b>0 / 10</b></div></div>
+ <p>sweeping <b>matrix LR</b>; 0 of 7 coordinates checked since the last move.</p>
+ <div class="chips"><span class="chip cur">matrix LR</span><span class="chip ">Muon momentum</span><span class="chip ">matrix WD</span><span class="chip ">aux LR (tied)</span><span class="chip ">aux beta1</span><span class="chip ">aux beta2</span><span class="chip ">aux cooldown</span></div>
+ <details><summary>current centre</summary><table class="kv"><tr><td>aux_beta1</td><td>0.8</td></tr><tr><td>aux_beta2</td><td>0.984992</td></tr><tr><td>aux_cooldown_frac</td><td>0.8</td></tr><tr><td>aux_lr_emb</td><td>0.588627</td></tr><tr><td>aux_lr_misc</td><td>0.0126134</td></tr><tr><td>aux_lr_proj</td><td>0.00336358</td></tr><tr><td>matrix_lr</td><td>0.0210224</td></tr><tr><td>matrix_mu</td><td>0.95</td></tr><tr><td>matrix_wd_peak</td><td>0.05</td></tr></table></details>
+ <details open><summary>recent decisions</summary><ul class="ev"><li class="muted">none yet</li></ul></details>
+</section></div>
+<h2 style="margin-top:18px">H100 reference re-runs (tuned 128K / 512K optima)</h2>
+<div class="wrap"><table><tr><th>batch</th><th>seed</th><th>status</th><th>loss</th></tr><tr><td>128K</td><td>1</td><td>pending</td><td>–</td></tr><tr><td>128K</td><td>2</td><td>pending</td><td>–</td></tr><tr><td>512K</td><td>1</td><td>pending</td><td>–</td></tr><tr><td>512K</td><td>2</td><td>pending</td><td>–</td></tr></table></div>
+<h2 style="margin-top:18px">Running now</h2><div class="wrap"><table><tr><th>search</th><th>run</th><th>seed</th><th>node</th><th>started</th></tr><tr><td colspan=5 class=muted>none</td></tr></table></div>
+<h2 style="margin-top:18px">Recently finished</h2><div class="wrap"><table><tr><th>search</th><th>seed</th><th>loss</th><th>min</th><th>finished</th></tr><tr><td colspan=5 class=muted>none</td></tr></table></div>
+</main></body></html>
